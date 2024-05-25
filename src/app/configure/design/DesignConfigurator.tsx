@@ -17,7 +17,8 @@ import {
 import { useState } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
+import { BASE_PRICE } from "@/config/products";
 
 interface DesignConfiguratorProps {
   configId: string
@@ -45,7 +46,7 @@ const DesignConfigurator = ({
 
 
   return (
-      <div className="relative mt-20 grid grid-cols-3 mb-20 pb-20">
+      <div className="relative mt-20 grid grid-cols-1 lg:grid-cols-3 mb-20 pb-20">
         <div className="relative w-full max-w-4xl h-[37.5rem] p-12 overflow-hidden col-span-2 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
           <div className="relative w-60 pointer-events-none aspect-[896/1831] bg-opacity-50">
             <AspectRatio
@@ -241,6 +242,21 @@ const DesignConfigurator = ({
               </div>
             </div>
           </ScrollArea>
+
+          <div className="w-full h-16 px-8 bg-white">
+            <div className="w-full h-px bg-zinc-200" />
+            <div className="w-full h-full flex justify-between gap-6 items-center">
+              <p className="font-medium whitespace-nowrap flex-auto">
+                {formatPrice(
+                  (BASE_PRICE + options.finish.price + options.material.price) / 100
+                )}
+              </p>
+              <Button size="sm" className="flex-1">
+                Continue
+                <ArrowRight className="w-4 h-4 ml-1.5 inline" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
   )
