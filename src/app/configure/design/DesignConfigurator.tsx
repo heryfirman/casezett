@@ -6,11 +6,16 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import NextImage from 'next/image'
 import { Rnd } from "react-rnd"
-import { Label, RadioGroup } from "@headlessui/react"
+import { RadioGroup } from "@headlessui/react"
+import { Label } from "@/components/ui/label"
 import { 
   COLORS,
+  MODELS,
 } from "@/validators/option-validator"
 import { useState } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Check, ChevronsUpDown } from "lucide-react";
 
 interface DesignConfiguratorProps {
   configId: string
@@ -26,8 +31,10 @@ const DesignConfigurator = ({
 
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number]
+    model: (typeof MODELS.options)[number]
   }>({
     color: COLORS[0],
+    model: MODELS.options[0],
   })
 
 
@@ -123,7 +130,44 @@ const DesignConfigurator = ({
                       ))}
                     </div>
                   </RadioGroup>
-
+                  
+                  <div className="relative w-full flex flex-col gap-3">
+                    <Label>Model</Label>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant='outline'
+                          role="combobox"
+                          className="w-full justify-between">
+                          {options.model.label}
+                          <ChevronsUpDown className="w-4 h-4 ml-2 shrink-0 opacity-50" />
+                          </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        {MODELS.options.map((model) => (
+                          <DropdownMenuItem
+                            key={model.label}
+                            className={cn(
+                              'flex items-center p-1.5 gap-1 text-sm cursor-pointer hover:bg-zinc-100',
+                              {
+                                'bg-zinc-100': model.label === options.model.label,
+                              }
+                            )}
+                            onClick={() => {
+                              setOptions((prev) => ({ ...prev, model }))
+                            }}>
+                            <Check
+                              className={cn(
+                                'w-4 h-4 mr-2',
+                                model.label === options.model.label ? 'opactiy-100' : 'opactiy-0'
+                              )}
+                            />
+                            {model.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
 
                 </div>
               </div>
