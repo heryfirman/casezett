@@ -260,7 +260,6 @@ export default function Home() {
               </div>
 
               <Phone className='w-60 relative md:-left-10 lg:absolute lg:top-96 lg:left-10' imgSrc='/horse_phone.jpg' />
-              {/* <Phone className='w-60' imgSrc='/horse_phone.jpg' /> */}
             </div>
           </div>
 
