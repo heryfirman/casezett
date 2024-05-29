@@ -42,7 +42,7 @@ export const MODELS = {
       value: 'iphone15',
     },
   ],
-} as const
+} 
 
 export const MATERIALS = {
   name: 'material',
@@ -60,7 +60,7 @@ export const MATERIALS = {
       price: PRODUCT_PRICES.material.polycarbonate,
     },
   ],
-} as const
+} 
 
 export const FINISHES = {
   name: 'finish',
@@ -78,4 +78,4 @@ export const FINISHES = {
       price: PRODUCT_PRICES.finish.textured,
     },
   ],
-} as const
+}
